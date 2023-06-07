@@ -28,7 +28,7 @@ export default function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { data: sessiondata } = useSession();
   const router = useRouter();
-  console.log("IMAGE URL", sessiondata?.user.image);
+  // console.log("IMAGE URL", sessiondata?.user.image);
 
   return (
     <>
