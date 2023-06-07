@@ -17,7 +17,7 @@ const SignIn: NextPage = () => {
   return (
     <>
       <div className="mx-auto flex min-h-screen flex-col justify-center bg-slate-100 py-12 sm:px-6 lg:px-8">
-        <div className="mx-auto   sm:w-full sm:max-w-md">
+        <div className="mx-auto max-w-md">
           <h2 className="mt-6  bg-gradient-to-r from-sky-400 to-blue-500 bg-clip-text text-center text-3xl font-extrabold text-transparent ">
             WATER PURITY CHECKER
           </h2>
