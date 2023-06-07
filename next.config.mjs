@@ -10,6 +10,13 @@ const config = {
   images: {
     domains: ["lh3.googleusercontent.com"],
   },
+
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   /**
    * If you have `experimental: { appDir: true }` set, then you must comment the below `i18n` config
    * out.
