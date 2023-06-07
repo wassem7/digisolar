@@ -3,14 +3,21 @@ import { SessionProvider } from "next-auth/react";
 import { type AppType } from "next/app";
 import { api } from "@/utils/api";
 import "@/styles/globals.css";
+import { Roboto_Mono } from "@next/font/google";
 
+const robotomono = Roboto_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+});
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
   return (
     <SessionProvider session={session}>
-      <Component {...pageProps} />
+      <main className={robotomono.className}>
+        <Component {...pageProps} />
+      </main>
     </SessionProvider>
   );
 };
