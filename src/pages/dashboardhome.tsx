@@ -95,7 +95,7 @@ export default function Dashboard() {
                   <div className="mt-5 h-0 flex-1 overflow-y-auto">
                     <nav className="space-y-1 px-2">
                       {navigation.map((item) => (
-                        <a
+                        <Link
                           key={item.name}
                           href={item.href}
                           className={classNames(
@@ -115,7 +115,7 @@ export default function Dashboard() {
                             aria-hidden="true"
                           />
                           {item.name}
-                        </a>
+                        </Link>
                       ))}
                     </nav>
                   </div>
@@ -133,12 +133,14 @@ export default function Dashboard() {
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex flex-grow flex-col overflow-y-auto border-r border-gray-200 bg-white pt-5">
             <div className="flex flex-shrink-0 items-center px-4">
-              {/* <img
+              <Image
                 className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                alt="Your Company"
-              /> */}
-              <h1 className="bg-gradient-to-r from-sky-400 to-blue-500 bg-clip-text text-center  font-extrabold text-transparent">
+                src="/waterlogo.png"
+                width={1080}
+                height={1080}
+                alt="Water Purity Checker"
+              />
+              <h1 className="bg-gradient-to-r from-sky-400 to-blue-500 bg-clip-text text-center text-sm  font-extrabold text-transparent">
                 WATER PURITY CHECKER
               </h1>
             </div>
@@ -182,7 +184,11 @@ export default function Dashboard() {
               <Bars3BottomLeftIcon className="h-6 w-6" aria-hidden="true" />
             </button>
             <div className="flex flex-1 justify-between px-4">
-              <div className="flex flex-1"></div>
+              <div className="flex flex-1 items-center">
+                {/* <h1 className="bg-gradient-to-r from-sky-400 to-blue-500 bg-clip-text text-center  font-extrabold text-transparent">
+                  WATER PURITY STATS
+                </h1> */}
+              </div>
               <div className="ml-4 flex items-center justify-end  md:ml-6">
                 {/* <button
                   type="button"
@@ -251,9 +257,9 @@ export default function Dashboard() {
           <main className="flex-1">
             <div className="py-6">
               <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
-                <h1 className="text-2xl font-semibold text-gray-900">
+                {/* <h1 className="text-2xl font-semibold text-sky-500">
                   Dashboard
-                </h1>
+                </h1> */}
               </div>
               <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
                 <Homepage />
