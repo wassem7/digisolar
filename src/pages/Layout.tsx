@@ -8,23 +8,24 @@ import {
   Cog6ToothIcon,
   QuestionMarkCircleIcon,
 } from "@heroicons/react/24/outline";
-import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 
 const navigation = [
-  { name: "Dashboard", href: "#", icon: HomeIcon, current: true },
-  { name: "Settings", href: "#", icon: Cog6ToothIcon, current: false },
-  { name: "FAQ", href: "#", icon: QuestionMarkCircleIcon, current: false },
+  { name: "Dashboard", href: "/dashboard", icon: HomeIcon, current: true },
+  { name: "Settings", href: "/settings", icon: Cog6ToothIcon, current: false },
+  { name: "FAQ", href: "/faq", icon: QuestionMarkCircleIcon, current: false },
 ];
 const userNavigation = [{ name: "Sign out", href: "#" }];
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
-
-export default function Dashboard() {
+interface Props {
+  children: React.ReactNode;
+}
+export default function Layout({ children }: Props) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { data: sessiondata } = useSession();
   const router = useRouter();
@@ -150,12 +151,12 @@ export default function Dashboard() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className={classNames(
-                      item.current
-                        ? "bg-gray-100 text-gray-900"
-                        : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-                      "group flex items-center rounded-md px-2 py-2 text-sm font-medium"
-                    )}
+                    className={`
+                     ${router.asPath === item.href && "bg-sky-200 text-sky-900"}
+                      
+                       group flex items-center
+                      rounded-md px-2 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50
+                    hover:text-gray-900`}
                   >
                     <item.icon
                       className={classNames(
@@ -262,11 +263,7 @@ export default function Dashboard() {
                 </h1> */}
               </div>
               <div className="mx-auto max-w-7xl space-y-6 px-4 sm:px-6 md:px-8">
-                <Homepage />
-                {/* <div className="py-4">
-                  <div className="h-96 rounded-lg border-4 border-dashed border-gray-200" />
-                </div> */}
-                {/* /End replace */}
+                {children}
               </div>
             </div>
           </main>

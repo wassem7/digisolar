@@ -3,6 +3,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { FormEventHandler, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import Footer from "./Footer";
 const SignIn: NextPage = () => {
   const router = useRouter();
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
@@ -10,7 +11,7 @@ const SignIn: NextPage = () => {
 
     const res = await signIn("google", {
       redirect: false,
-      callbackUrl: `${window.location.origin}/dashboardhome`,
+      callbackUrl: `${window.location.origin}/dashboard`,
     });
 
     // console.log(res);
