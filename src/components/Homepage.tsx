@@ -2,6 +2,9 @@ import React from "react";
 
 /* This example requires Tailwind CSS v2.0+ */
 import { ArrowDownIcon, ArrowUpIcon } from "@heroicons/react/20/solid";
+import { LineChart } from "./LineChart";
+import { LineChart2 } from "./LineChart2";
+import { LineChart3 } from "./LineChart3";
 
 const stats = [
   {
@@ -37,7 +40,7 @@ export default function Homepage() {
       <h3 className="text-lg font-bold leading-6 text-sky-900">
         Last 24 hours
       </h3>
-      <dl className="mt-5 grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow md:grid-cols-3 md:divide-x md:divide-y-0">
+      <dl className="mb-5 mt-5 grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow md:grid-cols-3 md:divide-x md:divide-y-0">
         {stats.map((item) => (
           <div key={item.name} className="px-4 py-5 sm:p-6">
             <dt className="text-base font-normal text-gray-900">{item.name}</dt>
@@ -82,6 +85,15 @@ export default function Homepage() {
           </div>
         ))}
       </dl>
+      <div className="mb-5">
+        <LineChart />
+      </div>
+      <div className="mb-5">
+        <LineChart2 />
+      </div>
+      <div className="mb-5">
+        <LineChart3 />
+      </div>
     </div>
   );
 }

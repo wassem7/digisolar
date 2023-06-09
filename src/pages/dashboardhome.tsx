@@ -261,7 +261,7 @@ export default function Dashboard() {
                   Dashboard
                 </h1> */}
               </div>
-              <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
+              <div className="mx-auto max-w-7xl space-y-6 px-4 sm:px-6 md:px-8">
                 <Homepage />
                 {/* <div className="py-4">
                   <div className="h-96 rounded-lg border-4 border-dashed border-gray-200" />
