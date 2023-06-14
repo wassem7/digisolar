@@ -2,7 +2,7 @@ import { Fragment, useState } from "react";
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import {
   Bars3BottomLeftIcon,
-  BellIcon,
+
   HomeIcon,
   XMarkIcon,
   Cog6ToothIcon,
@@ -13,9 +13,9 @@ import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 
 const navigation = [
-  { name: "Dashboard", href: "/dashboard", icon: HomeIcon, current: true },
-  { name: "Settings", href: "/settings", icon: Cog6ToothIcon, current: false },
-  { name: "FAQ", href: "/faq", icon: QuestionMarkCircleIcon, current: false },
+  { name: "Dashboard", href: "/dashboard", icon: HomeIcon},
+  { name: "Settings", href: "/settings", icon: Cog6ToothIcon },
+  { name: "FAQ", href: "/faq", icon: QuestionMarkCircleIcon},
 ];
 const userNavigation = [{ name: "Sign out", href: "#" }];
 
@@ -191,13 +191,6 @@ export default function Layout({ children }: Props) {
                 </h1> */}
               </div>
               <div className="ml-4 flex items-center justify-end  md:ml-6">
-                {/* <button
-                  type="button"
-                  className="rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button> */}
                 <h1>
                   {`Hello `}
                   <span className="font-extrabold">
@@ -258,9 +251,7 @@ export default function Layout({ children }: Props) {
           <main className="flex-1">
             <div className="py-6">
               <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
-                {/* <h1 className="text-2xl font-semibold text-sky-500">
-                  Dashboard
-                </h1> */}
+                
               </div>
               <div className="mx-auto max-w-7xl space-y-6 px-4 sm:px-6 md:px-8">
                 {children}
