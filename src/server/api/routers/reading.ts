@@ -35,7 +35,7 @@ export const readingRouter = createTRPCRouter({
 
   createPh: publicProcedure
     .meta({
-      openapi: { method: "POST", path: "/create/{ph}", enabled: true },
+      openapi: { method: "POST", path: "/createph/", enabled: true },
     })
     .input(z.object({ ph: z.string() }))
     .output(z.object({ ph: z.string() }))
@@ -45,31 +45,33 @@ export const readingRouter = createTRPCRouter({
       return await ctx.prisma.ph.create({
         data: { ph: input.ph },
       });
-      // return { ph: ` ${input.name}` };
     }),
 
-  createPhone: publicProcedure
-    .meta({
-      openapi: { method: "POST", path: "/newcreate/", enabled: true },
-    })
-    .input(z.object({ ph: z.string() }))
-    .output(z.object({ ph: z.string() }))
-    .mutation(async ({ input, ctx }) => {
-      console.log(input.ph);
+  // createConductivity: publicProcedure
+  //   .meta({
+  //     openapi: { method: "POST", path: "/createconductivity/", enabled: true },
+  //   })
+  //   .input(z.object({ ph: z.string() }))
+  //   .output(z.object({ ph: z.string() }))
+  //   .mutation(async ({ input, ctx }) => {
+  //     console.log(input.ph);
 
-      return await ctx.prisma.ph.create({
-        data: { ph: input.ph },
-      });
-      // return { ph: ` ${input.name}` };
-    }),
+  //     return await ctx.prisma.conductivity.create({
+  //       data: { ph: input.ph },
+  //     });
+  //   }),
 
-  getHello: publicProcedure
-    .meta({
-      openapi: { method: "GET", path: "/say-hello", enabled: true },
-    })
-    .input(z.object({ name: z.string() }))
-    .output(z.object({ greeting: z.string() }))
-    .query(({ input }) => {
-      return { greeting: ` ${input.name}` };
-    }),
+  // createTurbidity: publicProcedure
+  //   .meta({
+  //     openapi: { method: "POST", path: "/createturbidity/", enabled: true },
+  //   })
+  //   .input(z.object({ turbidity: z.string() }))
+  //   .output(z.object({ turbidity: z.string() }))
+  //   .mutation(async ({ input, ctx }) => {
+  //     console.log(input.turbidity);
+
+  //     return await ctx.prisma.turbidity.create({
+  //       data: { turbidity: input.turbidity },
+  //     });
+  //   }),
 });
