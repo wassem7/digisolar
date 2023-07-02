@@ -48,6 +48,21 @@ export const readingRouter = createTRPCRouter({
       // return { ph: ` ${input.name}` };
     }),
 
+  createPhone: publicProcedure
+    .meta({
+      openapi: { method: "POST", path: "/newcreate/", enabled: true },
+    })
+    .input(z.object({ ph: z.string() }))
+    .output(z.object({ ph: z.string() }))
+    .mutation(async ({ input, ctx }) => {
+      console.log(input.ph);
+
+      return await ctx.prisma.ph.create({
+        data: { ph: input.ph },
+      });
+      // return { ph: ` ${input.name}` };
+    }),
+
   getHello: publicProcedure
     .meta({
       openapi: { method: "GET", path: "/say-hello", enabled: true },
