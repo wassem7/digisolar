@@ -47,31 +47,31 @@ export const readingRouter = createTRPCRouter({
       });
     }),
 
-  // createConductivity: publicProcedure
-  //   .meta({
-  //     openapi: { method: "POST", path: "/createconductivity/", enabled: true },
-  //   })
-  //   .input(z.object({ ph: z.string() }))
-  //   .output(z.object({ ph: z.string() }))
-  //   .mutation(async ({ input, ctx }) => {
-  //     console.log(input.ph);
+  createConductivity: publicProcedure
+    .meta({
+      openapi: { method: "POST", path: "/createconductivity/", enabled: true },
+    })
+    .input(z.object({ conductivity: z.string() }))
+    .output(z.object({ conductivity: z.string() }))
+    .mutation(async ({ input, ctx }) => {
+      console.log(input.conductivity);
 
-  //     return await ctx.prisma.conductivity.create({
-  //       data: { ph: input.ph },
-  //     });
-  //   }),
+      return await ctx.prisma.conductivity.create({
+        data: { conductivity: input.conductivity },
+      });
+    }),
 
-  // createTurbidity: publicProcedure
-  //   .meta({
-  //     openapi: { method: "POST", path: "/createturbidity/", enabled: true },
-  //   })
-  //   .input(z.object({ turbidity: z.string() }))
-  //   .output(z.object({ turbidity: z.string() }))
-  //   .mutation(async ({ input, ctx }) => {
-  //     console.log(input.turbidity);
+  createTurbidity: publicProcedure
+    .meta({
+      openapi: { method: "POST", path: "/createturbidity/", enabled: true },
+    })
+    .input(z.object({ turbidity: z.string() }))
+    .output(z.object({ turbidity: z.string() }))
+    .mutation(async ({ input, ctx }) => {
+      console.log(input.turbidity);
 
-  //     return await ctx.prisma.turbidity.create({
-  //       data: { turbidity: input.turbidity },
-  //     });
-  //   }),
+      return await ctx.prisma.turbidity.create({
+        data: { turbidity: input.turbidity },
+      });
+    }),
 });

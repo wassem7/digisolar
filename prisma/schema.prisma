@@ -74,7 +74,7 @@ model Ph {
 model Conductivity {
     id        String   @unique @default(cuid())
     createdAt DateTime @default(now())
-    ph        String
+    conductivity        String
 }
 
 model Turbidity {
