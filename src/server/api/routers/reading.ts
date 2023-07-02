@@ -35,7 +35,7 @@ export const readingRouter = createTRPCRouter({
 
   createPh: publicProcedure
     .meta({
-      openapi: { method: "POST", path: "/create/", enabled: true },
+      openapi: { method: "POST", path: "/create/{ph}", enabled: true },
     })
     .input(z.object({ ph: z.string() }))
     .output(z.object({ ph: z.string() }))
