@@ -33,6 +33,42 @@ export const readingRouter = createTRPCRouter({
     };
   }),
 
+  getph: publicProcedure
+    .meta({
+      openapi: { method: "GET", path: "/getph/", enabled: true },
+    })
+    .input(z.void())
+    .output(
+      z.array(
+        z.object({
+          id: z.string(),
+          createdAt: z.date(),
+          ph: z.string(),
+        })
+      )
+    )
+    .query(async ({ ctx }) => {
+      return await ctx.prisma.ph.findMany();
+    }),
+
+  getconductivity: publicProcedure
+    .meta({
+      openapi: { method: "GET", path: "/getconductivity/", enabled: true },
+    })
+    .input(z.void())
+    .output(
+      z.array(
+        z.object({
+          id: z.string(),
+          createdAt: z.date(),
+          conductivity: z.string(),
+        })
+      )
+    )
+    .query(async ({ ctx }) => {
+      return await ctx.prisma.conductivity.findMany();
+    }),
+
   createPh: publicProcedure
     .meta({
       openapi: { method: "POST", path: "/createph/", enabled: true },
@@ -73,5 +109,37 @@ export const readingRouter = createTRPCRouter({
       return await ctx.prisma.turbidity.create({
         data: { turbidity: input.turbidity },
       });
+    }),
+
+  deleteph: publicProcedure
+    .meta({
+      openapi: { method: "DELETE", path: "/deleteph/", enabled: true },
+    })
+    .input(z.void())
+    .output(z.object({ message: z.string() }))
+    .mutation(async ({ ctx }) => {
+      const deletePh = await ctx.prisma.ph.deleteMany();
+
+      return {
+        message: "Deleted",
+      };
+    }),
+
+  deleteconductivity: publicProcedure
+    .meta({
+      openapi: {
+        method: "DELETE",
+        path: "/deleteconductivity/",
+        enabled: true,
+      },
+    })
+    .input(z.void())
+    .output(z.object({ message: z.string() }))
+    .mutation(async ({ ctx }) => {
+      const deletePh = await ctx.prisma.conductivity.deleteMany();
+
+      return {
+        message: "Deleted",
+      };
     }),
 });

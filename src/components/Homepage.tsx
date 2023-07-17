@@ -40,7 +40,7 @@ export default function Homepage() {
   return (
     <Dashboard>
       <div>
-        <h3 className="text-lg font-bold leading-6 text-sky-900">
+        {/* <h3 className="text-lg font-bold leading-6 text-sky-900">
           Last 24 hours
         </h3>
         <dl className="mb-5 mt-5 grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow md:grid-cols-3 md:divide-x md:divide-y-0">
@@ -89,13 +89,13 @@ export default function Homepage() {
               </dd>
             </div>
           ))}
-        </dl>
+        </dl> */}
         <div className="mb-5">
           <LineChart />
         </div>
-        <div className="mb-5">
+        {/* <div className="mb-5">
           <LineChart2 />
-        </div>
+        </div> */}
         <div className="mb-5">
           <LineChart3 />
         </div>

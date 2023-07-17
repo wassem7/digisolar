@@ -17,6 +17,10 @@ const config = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  webpack(config) {
+    config.experiments = { ...config.experiments, topLevelAwait: true };
+    return config;
+  },
   /**
    * If you have `experimental: { appDir: true }` set, then you must comment the below `i18n` config
    * out.

@@ -4,7 +4,7 @@ import React from "react";
 const SettingsPage = () => {
   return (
     <Layout>
-      <div>Will be worked on this week </div>
+      <div>Settings Page </div>
     </Layout>
   );
 };
