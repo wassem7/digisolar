@@ -5,7 +5,6 @@ import { ArrowDownIcon, ArrowUpIcon } from "@heroicons/react/20/solid";
 import { LineChart } from "./LineChart";
 import { LineChart2 } from "./LineChart2";
 import { LineChart3 } from "./LineChart3";
-import Footer from "./Footer";
 import Dashboard from "@/pages/Layout";
 
 const stats = [

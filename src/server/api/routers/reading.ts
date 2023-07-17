@@ -25,14 +25,6 @@ export const readingRouter = createTRPCRouter({
       };
     }),
 
-  all: publicProcedure.query(async ({ ctx }) => {
-    console.log("yo");
-
-    return {
-      data: "Hello this is a get request !",
-    };
-  }),
-
   getph: publicProcedure
     .meta({
       openapi: { method: "GET", path: "/getph/", enabled: true },
