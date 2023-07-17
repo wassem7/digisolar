@@ -1,1 +1,1 @@
-Water Purity Check Admin panel
+DigiSolar Check Admin panel

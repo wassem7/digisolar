@@ -56,29 +56,8 @@ model VerificationToken {
     @@unique([identifier, token])
 }
 
-model readings {
-    id           String   @unique @default(cuid())
-    createdAt    DateTime @default(now())
-    updatedAt    DateTime @default(now())
-    ph           String
-    conductivity String
-    turbidity    String
-}
-
-model Ph {
-    id        String   @unique @default(cuid())
+model Power {
+    id        String   @id @unique @default(cuid())
     createdAt DateTime @default(now())
-    ph        String
-}
-
-model Conductivity {
-    id        String   @unique @default(cuid())
-    createdAt DateTime @default(now())
-    conductivity        String
-}
-
-model Turbidity {
-    id        String   @unique @default(cuid())
-    createdAt DateTime @default(now())
-    turbidity String
+    power     String
 }

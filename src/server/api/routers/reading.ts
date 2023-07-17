@@ -9,25 +9,9 @@ import {
 } from "@/server/api/trpc";
 
 export const readingRouter = createTRPCRouter({
-  createph: publicProcedure
-    // .input(z.string())
-    .mutation(async ({ ctx, input }) => {
-      console.log("POST REQUEST");
-
-      console.log(input);
-
-      // return ctx.prisma.ph.create({
-      //   data: { ph: input.ph },
-      // });
-      return {
-        status: "Data received !",
-        message: input,
-      };
-    }),
-
-  getph: publicProcedure
+  getpower: publicProcedure
     .meta({
-      openapi: { method: "GET", path: "/getph/", enabled: true },
+      openapi: { method: "GET", path: "/getpower/", enabled: true },
     })
     .input(z.void())
     .output(
@@ -35,100 +19,36 @@ export const readingRouter = createTRPCRouter({
         z.object({
           id: z.string(),
           createdAt: z.date(),
-          ph: z.string(),
+          power: z.string(),
         })
       )
     )
     .query(async ({ ctx }) => {
-      return await ctx.prisma.ph.findMany();
+      return await ctx.prisma.power.findMany();
     }),
 
-  getconductivity: publicProcedure
+  createPower: publicProcedure
     .meta({
-      openapi: { method: "GET", path: "/getconductivity/", enabled: true },
+      openapi: { method: "POST", path: "/createpower/", enabled: true },
     })
-    .input(z.void())
-    .output(
-      z.array(
-        z.object({
-          id: z.string(),
-          createdAt: z.date(),
-          conductivity: z.string(),
-        })
-      )
-    )
-    .query(async ({ ctx }) => {
-      return await ctx.prisma.conductivity.findMany();
-    }),
-
-  createPh: publicProcedure
-    .meta({
-      openapi: { method: "POST", path: "/createph/", enabled: true },
-    })
-    .input(z.object({ ph: z.string() }))
-    .output(z.object({ ph: z.string() }))
+    .input(z.object({ power: z.string() }))
+    .output(z.object({ power: z.string() }))
     .mutation(async ({ input, ctx }) => {
-      console.log(input.ph);
+      console.log(input.power);
 
-      return await ctx.prisma.ph.create({
-        data: { ph: input.ph },
+      return await ctx.prisma.power.create({
+        data: { power: input.power },
       });
     }),
 
-  createConductivity: publicProcedure
+  deletepower: publicProcedure
     .meta({
-      openapi: { method: "POST", path: "/createconductivity/", enabled: true },
-    })
-    .input(z.object({ conductivity: z.string() }))
-    .output(z.object({ conductivity: z.string() }))
-    .mutation(async ({ input, ctx }) => {
-      console.log(input.conductivity);
-
-      return await ctx.prisma.conductivity.create({
-        data: { conductivity: input.conductivity },
-      });
-    }),
-
-  createTurbidity: publicProcedure
-    .meta({
-      openapi: { method: "POST", path: "/createturbidity/", enabled: true },
-    })
-    .input(z.object({ turbidity: z.string() }))
-    .output(z.object({ turbidity: z.string() }))
-    .mutation(async ({ input, ctx }) => {
-      console.log(input.turbidity);
-
-      return await ctx.prisma.turbidity.create({
-        data: { turbidity: input.turbidity },
-      });
-    }),
-
-  deleteph: publicProcedure
-    .meta({
-      openapi: { method: "DELETE", path: "/deleteph/", enabled: true },
+      openapi: { method: "DELETE", path: "/deletepower/", enabled: true },
     })
     .input(z.void())
     .output(z.object({ message: z.string() }))
     .mutation(async ({ ctx }) => {
-      const deletePh = await ctx.prisma.ph.deleteMany();
-
-      return {
-        message: "Deleted",
-      };
-    }),
-
-  deleteconductivity: publicProcedure
-    .meta({
-      openapi: {
-        method: "DELETE",
-        path: "/deleteconductivity/",
-        enabled: true,
-      },
-    })
-    .input(z.void())
-    .output(z.object({ message: z.string() }))
-    .mutation(async ({ ctx }) => {
-      const deletePh = await ctx.prisma.conductivity.deleteMany();
+      const deletePh = await ctx.prisma.power.deleteMany();
 
       return {
         message: "Deleted",
