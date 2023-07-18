@@ -7,7 +7,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Water Purity Checker </title>
+        <title>DigiSolar </title>
         <meta name="description" content="Water purity checker" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

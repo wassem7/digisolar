@@ -3,7 +3,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { FormEventHandler, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import Footer from "./Footer";
+
 const SignIn: NextPage = () => {
   const router = useRouter();
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
@@ -17,54 +17,40 @@ const SignIn: NextPage = () => {
     // console.log(res);
   };
   return (
-    <>
-      <div className="flex min-h-screen ">
-        <div className="flex flex-1 flex-col justify-center px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
-          <div className="mx-auto w-full max-w-sm lg:w-96">
-            <div>
-              <div className="flex items-center space-x-2">
-                <Image
-                  className="h-12 w-auto"
-                  src="/waterlogo.png"
-                  alt="Water Purity Checker"
-                  width={1080}
-                  height={1080}
-                />
-                <div>
-                  <h1 className="font-extrabold">Water Purity Checker</h1>
-                </div>
-              </div>
+    <div className=" flex min-h-screen  flex-col items-center justify-center bg-black">
+      <div className=" /w-full relative m-8 flex flex-col items-center justify-center rounded-xl border bg-[#141414] px-14 py-20 shadow-md backdrop-blur-sm backdrop-filter focus:outline-none">
+        {/* <div className="flex items-center rounded-lg bg-white ">
+            <h1>Hello</h1>
+          </div> */}
 
-              <h2 className="mt-6 text-3xl font-bold tracking-tight text-gray-900">
-                Sign in to your account
-              </h2>
-            </div>
-
-            <div className="mt-8">
-              <div className="mt-6">
-                <form className="space-y-6" onSubmit={handleSubmit}>
-                  <button
-                    type="submit"
-                    className="flex w-full justify-center rounded-md border border-transparent bg-blue-400 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
-                  >
-                    Continue with Google
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="relative hidden min-h-full w-0 flex-1 lg:block">
+        <div className="/absolute flex-co /bg-purple-500 -mt-11 mb-4 flex ">
           <Image
-            className="absolute inset-0 h-full w-full object-cover brightness-50"
-            src="/waterpic.jpg"
-            alt="Water Picture"
-            height={5184}
-            width={3456}
+            className="h-64 w-64"
+            src="/logo.png"
+            width={300}
+            height={300}
+            alt="DigiSolar Logo"
           />
         </div>
+
+        {/* TEXT AREA */}
+        <div className="/bg-blue-600  -mt-8  flex w-full items-center justify-center text-center ">
+          {/* <h1 className="mb-1 text-5xl font-bold text-white  ">
+            All in one platform{" "}
+          </h1>
+          <p className="mb-3 bg-gradient-to-r from-green-400 to-purple-400 bg-clip-text text-3xl font-semibold text-transparent">
+            for your AI/Productivity Learning tools
+          </p> */}
+
+          <button
+            onClick={handleSubmit}
+            className=" flex w-72  justify-center   rounded-md   border border-gray-100 bg-gray-400 bg-opacity-10 px-4   py-2 text-center  text-sm  font-medium  text-white shadow-sm backdrop-blur-sm backdrop-filter focus:outline-none focus:ring-2 focus:ring-gray-400 "
+          >
+            Sign in with Google
+          </button>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 export default SignIn;
