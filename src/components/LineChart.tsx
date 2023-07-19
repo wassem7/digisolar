@@ -8,6 +8,7 @@ import {
   Title,
   Tooltip,
   Legend,
+  ChartOptions,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 
@@ -33,8 +34,15 @@ export function LineChart() {
       </h1>
     );
   }
-  const options = {
+  const options: ChartOptions = {
     responsive: true,
+    scales: {
+      y: {
+        ticks: {
+          stepSize: 0.1,
+        },
+      },
+    },
     plugins: {
       legend: {
         position: "top" as const,
