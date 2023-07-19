@@ -40,7 +40,7 @@ export default function Homepage() {
   return (
     <div className="relative mx-auto flex min-h-screen justify-center bg-black">
       <Topbar />
-      <div className="/bg-green-500 mb-5 mt-28 flex max-w-4xl">
+      <div className="/bg-green-500 mb-5 mt-28 flex w-1/2">
         <LineChart />
       </div>
       {/* <div className="mb-5">
