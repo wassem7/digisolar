@@ -39,7 +39,7 @@ export function LineChart() {
     scales: {
       y: {
         ticks: {
-          stepSize: 0.1,
+          stepSize: 0.01,
         },
       },
     },
