@@ -8,7 +8,7 @@ const Home: NextPage = () => {
     <>
       <Head>
         <title>DigiSolar </title>
-        <meta name="description" content="Water purity checker" />
+        <meta name="description" content="DigiSolar" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
