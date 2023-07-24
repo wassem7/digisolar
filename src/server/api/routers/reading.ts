@@ -1,6 +1,4 @@
 import { z } from "zod";
-import { SerialPort } from "serialport";
-import { ReadlineParser } from "serialport";
 
 import {
   createTRPCRouter,
