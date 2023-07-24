@@ -12,6 +12,7 @@ function classNames(...classes: any) {
 const Topbar = () => {
   const router = useRouter();
   const { data: session } = useSession();
+  console.log(session);
 
   return (
     <>
@@ -51,14 +52,15 @@ const Topbar = () => {
           <div
             className={` flex items-center  justify-center rounded-2xl px-3 py-[5.4px] text-white hover:cursor-pointer `}
           >
-            <div className="flex  min-w-[30px]">
+            <div className="flex min-w-[30px] items-center justify-center">
               <Image
-                className="/inline-block  h-7 w-7 rounded-full sm:h-8 sm:w-8"
-                src={session?.user.image as string}
+                className="/inline-block  w-18 h-18 rounded-full sm:h-8 sm:w-8"
+                src="/logo2.png"
                 alt=""
-                width={50}
-                height={14}
+                width={500}
+                height={500}
               />
+              <h1 className="ml-2 font-bold">DigiSolar</h1>
             </div>
           </div>
         </div>

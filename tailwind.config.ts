@@ -4,6 +4,9 @@ export default {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      colors: {
+        lightblack: "#4E4E4E",
+      },
       animation: {
         blob: "blob 10s infinite",
       },
@@ -30,4 +33,3 @@ export default {
     require("@tailwindcss/aspect-ratio"),
   ],
 } satisfies Config;
-

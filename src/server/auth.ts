@@ -1,69 +1,159 @@
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { type GetServerSidePropsContext } from "next";
-import {
-  getServerSession,
-  type NextAuthOptions,
-  type DefaultSession,
-} from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
-import { env } from "@/env.mjs";
+import { getServerSession, type NextAuthOptions } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "@/server/db";
+import GoogleProvider from "next-auth/providers/google";
+import bcrypt from "bcrypt";
+import {
+  AuthUser,
+  jwtHelper,
+  tokenOneDay,
+  tokenOnWeek,
+} from "@/utils/jwtHelper";
 
-/**
- * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
- * object and keep type safety.
- *
- * @see https://next-auth.js.org/getting-started/typescript#module-augmentation
- */
-declare module "next-auth" {
-  interface Session extends DefaultSession {
-    user: {
-      id: string;
-      // ...other properties
-      // role: UserRole;
-    } & DefaultSession["user"];
-  }
-
-  // interface User {
-  //   // ...other properties
-  //   // role: UserRole;
-  // }
-}
-
-/**
- * Options for NextAuth.js used to configure adapters, providers, callbacks, etc.
- *
- * @see https://next-auth.js.org/configuration/options
- */
 export const authOptions: NextAuthOptions = {
-  callbacks: {
-    session: ({ session, user }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: user.id,
+  adapter: PrismaAdapter(prisma),
+  session: {
+    strategy: "jwt",
+    maxAge: 60 * 60,
+  },
+  providers: [
+    CredentialsProvider({
+      // id: "next-auth",
+      // name: "Login with email",
+
+      async authorize(credentials, req) {
+        try {
+          const user = await prisma.user.findFirst({
+            where: {
+              name: credentials?.username,
+            },
+          });
+
+          console.log("USER", user);
+          console.log("CREDENTIALS", credentials);
+
+          if (user && credentials) {
+            const validPassword = await bcrypt.compare(
+              credentials?.password,
+              user.password
+            );
+            console.log("Valid Password", validPassword);
+
+            if (validPassword) {
+              return {
+                id: user.id,
+                name: user.name,
+              };
+            }
+          } else if (!user && !credentials.isSignUp) {
+            const isUser = await prisma.user.findFirst({
+              where: {
+                name: credentials.username,
+              },
+            });
+
+            if (!isUser) {
+              const hashPassword = await bcrypt.hash(credentials.password, 10);
+              const newUser = await prisma.user.create({
+                data: {
+                  name: credentials.username,
+                  password: hashPassword,
+                },
+              });
+
+              console.log("NEWUSER", newUser);
+
+              return {
+                id: newUser.id,
+                name: newUser.name,
+              };
+            }
+          }
+        } catch (error) {
+          console.log(error);
+        }
+        return null;
+      },
+      credentials: {
+        username: {
+          label: "Username",
+          type: "text",
+          placeholder: "jsmith",
+        },
+        password: {
+          label: "Password",
+          type: "password",
+        },
       },
     }),
-  },
-  adapter: PrismaAdapter(prisma),
-  providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    }),
-    /**
-     * ...add more providers here.
-     *
-     * Most other providers require a bit more work than the Discord provider. For example, the
-     * GitHub provider requires you to add the `refresh_token_expires_in` field to the Account
-     * model. Refer to the NextAuth.js docs for the provider you want to use. Example:
-     *
-     * @see https://next-auth.js.org/providers/github
-     */
   ],
   pages: {
     signIn: "/components/SignIn",
-    // signOut: "/",
+    newUser: "components/Registerpage",
+    signOut: "/",
+  },
+  callbacks: {
+    async jwt({ token, user, profile, account, isNewUser }) {
+      // credentials provider:  Save the access token and refresh token in the JWT on the initial login
+      if (user) {
+        const authUser = { id: user.id, name: user.name } as AuthUser;
+
+        const accessToken = await jwtHelper.createAcessToken(authUser);
+        const refreshToken = await jwtHelper.createRefreshToken(authUser);
+        const accessTokenExpired = Date.now() / 1000 + tokenOneDay;
+        const refreshTokenExpired = Date.now() / 1000 + tokenOnWeek;
+
+        return {
+          ...token,
+          accessToken,
+          refreshToken,
+          accessTokenExpired,
+          refreshTokenExpired,
+          user: authUser,
+        };
+      } else {
+        if (token) {
+          // If the access token has expired, try to refresh it
+          if (Date.now() / 1000 > token.accessTokenExpired) {
+            const verifyToken = await jwtHelper.verifyToken(token.refreshToken);
+
+            if (verifyToken) {
+              const user = await prisma.user.findFirst({
+                where: {
+                  name: token.user.name,
+                },
+              });
+
+              if (user) {
+                const accessToken = await jwtHelper.createAcessToken(
+                  token.user
+                );
+                const accessTokenExpired = Date.now() / 1000 + tokenOneDay;
+
+                return { ...token, accessToken, accessTokenExpired };
+              }
+            }
+
+            return { ...token, error: "RefreshAccessTokenError" };
+          }
+        }
+      }
+
+      return token;
+    },
+
+    async session({ session, token }) {
+      if (token) {
+        session.user = {
+          name: token.user.name,
+          userId: token.user.id,
+        };
+      }
+      session.error = token.error;
+      return session;
+    },
   },
 };
 
