@@ -4,16 +4,19 @@ import { FormEventHandler, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
+import LoadingSpinnerYellow from "./LoadingSpinnerYellow";
 
 const SignIn: NextPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
+  const [loadingspinner, setLoadingSpinner] = useState(false);
   console.log(username);
   console.log(password);
   const router = useRouter();
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    setLoadingSpinner(true);
     setError(false);
     const res = await signIn("credentials", {
       username: username,
@@ -29,8 +32,10 @@ const SignIn: NextPage = () => {
     //   router.push(callbackUrl);
     // }
     if (res?.error) {
+      setLoadingSpinner(false);
       setError(true);
     } else {
+      setLoadingSpinner(false);
       router.push(`${window.location.origin}/dashboard`);
     }
 
@@ -105,6 +110,11 @@ const SignIn: NextPage = () => {
               type="submit"
               className=" flex w-72  justify-center   rounded-md   border border-gray-100 bg-gray-400 bg-opacity-10 px-4   py-2 text-center  text-sm  font-medium  text-white shadow-sm backdrop-blur-sm backdrop-filter focus:outline-none focus:ring-2 focus:ring-gray-400 "
             >
+              {loadingspinner && (
+                <span>
+                  <LoadingSpinnerYellow />
+                </span>
+              )}
               SignIn
             </button>
           </div>

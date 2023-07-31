@@ -26,7 +26,7 @@ ChartJS.register(
 
 export function LineChart() {
   const { data: phdata } = api.reading.getpower.useQuery();
-
+console.log('SOlar readings',phdata)
   if (!phdata) {
     return (
       <h1 className="font-semibold tracking-wider text-amber-500">
