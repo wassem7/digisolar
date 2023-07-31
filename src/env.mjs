@@ -21,6 +21,7 @@ const server = z.object({
   JWT_SECRET: z.string(),
   GOOGLE_CLIENT_ID: z.string(),
   GOOGLE_CLIENT_SECRET: z.string(),
+  WEATHER_API_KEY: z.string(),
   // Add `.min(1) on ID and SECRET if you want to make sure they're not empty
 });
 
@@ -46,6 +47,7 @@ const processEnv = {
   JWT_SECRET: process.env.JWT_SECRET,
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+  WEATHER_API_KEY: process.env.WEATHER_API_KEY,
   // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
 };
 

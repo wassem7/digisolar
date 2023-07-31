@@ -1,14 +1,14 @@
 import React from "react";
 
-import { LineChart } from "./LineChart";
-
-import { signIn, useSession } from "next-auth/react";
+import Topbar from "./Topbar";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import Weather from "./Weather";
 
-import Layout from "./Layout";
+interface Props {
+  children: React.ReactNode;
+}
 
-export default function Homepage() {
+export default function Layout({ children }: Props) {
   const { data: sessionData } = useSession();
   const router = useRouter();
   console.log("SESSION DATA", sessionData);
@@ -26,9 +26,11 @@ export default function Homepage() {
     );
   }
   return (
-    <Layout>
-      <Weather />
-      <LineChart />
-    </Layout>
+    <div className="relative mx-auto flex min-h-screen justify-center bg-black">
+      <Topbar />
+      <div className="/bg-green-500 mb-5 mt-28 flex w-1/2 flex-col">
+        {children}
+      </div>
+    </div>
   );
 }

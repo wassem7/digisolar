@@ -25,21 +25,52 @@ ChartJS.register(
 );
 
 export function LineChart() {
-  const { data: phdata } = api.reading.getpower.useQuery();
-console.log('SOlar readings',phdata)
+  const {
+    data: phdata,
+    isRefetching,
+    refetch,
+    isFetched,
+  } = api.reading.getpower.useQuery();
+  console.log("SOlar readings", phdata);
   if (!phdata) {
     return (
       <h1 className="font-semibold tracking-wider text-amber-500">
-        Loading Power data
+        Loading Power data...
       </h1>
     );
   }
+  // if (isFetched === true) {
+  //   refetch();
+  // }
+  // console.log("ISFETCHED", isFetched);
+
   const options: ChartOptions = {
     responsive: true,
     scales: {
       y: {
         ticks: {
           stepSize: 0.01,
+        },
+        title: {
+          display: true,
+          text: "Power (µW)",
+          color: "#ffff",
+
+          font: {
+            size: 16, // Set the font size for the y-axis label
+          },
+        },
+      },
+
+      x: {
+        title: {
+          display: true,
+          text: "Time ( AM / PM )",
+          color: "#ffff",
+
+          font: {
+            size: 16, // Set the font size for the y-axis label
+          },
         },
       },
     },
@@ -49,7 +80,12 @@ console.log('SOlar readings',phdata)
       },
       title: {
         display: true,
-        text: "POWER VALUE CHART ",
+        text: "Power Generated",
+        color: "#ffff",
+
+        font: {
+          size: 16,
+        },
       },
     },
   };
@@ -64,7 +100,7 @@ console.log('SOlar readings',phdata)
     return formattedTime;
   });
 
-  console.log("FORMATTED TIMES", formattedTimes);
+  // console.log("FORMATTED TIMES", formattedTimes);
 
   const labels = formattedTimes.map((phvalue) => phvalue);
 
@@ -73,7 +109,7 @@ console.log('SOlar readings',phdata)
 
     datasets: [
       {
-        label: "POWER Readings",
+        label: "Power Value",
         data: phdata.map((phvalue) => phvalue.power),
         borderColor: "#fbbf24",
         backgroundColor: "#c2410c",
@@ -81,5 +117,9 @@ console.log('SOlar readings',phdata)
     ],
   };
 
-  return <Line options={options} data={data} />;
+  return (
+    <div className="mt-6 rounded-xl border bg-[#141414]  p-2  shadow-md backdrop-blur-sm backdrop-filter focus:outline-none">
+      <Line options={options} data={data} />;
+    </div>
+  );
 }

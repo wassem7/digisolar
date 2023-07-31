@@ -1,5 +1,6 @@
 import { readingRouter } from "@/server/api/routers/reading";
 import { createTRPCRouter } from "@/server/api/trpc";
+import { weatherRouter } from "./routers/weather";
 
 /**
  * This is the primary router for your server.
@@ -8,6 +9,7 @@ import { createTRPCRouter } from "@/server/api/trpc";
  */
 export const appRouter = createTRPCRouter({
   reading: readingRouter,
+  weather: weatherRouter,
 });
 
 // export type definition of API
