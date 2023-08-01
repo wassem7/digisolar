@@ -110,7 +110,14 @@ export function LineChart() {
     datasets: [
       {
         label: "Power Value",
-        data: phdata.map((phvalue) => phvalue.power),
+        data: phdata.map((phvalue) => {
+          const num = parseFloat(phvalue.power);
+          if (typeof num !== "number" && isNaN(num)) {
+            return;
+          }
+
+          return phvalue.power;
+        }),
         borderColor: "#fbbf24",
         backgroundColor: "#c2410c",
       },
