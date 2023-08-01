@@ -19,21 +19,23 @@ const Topbar = () => {
       <div className="/mx-4 /absolute /inset-x-full /sm:mx-[500px]   /bg-yellow-500 fixed inset-x-0   top-2 z-10   p-4 lg:mx-80 ">
         <div className="/justify-evenly /justify-center flex h-[50px] items-center justify-around rounded-3xl border border-gray-100 bg-gray-400 bg-opacity-20  px-4 py-2 text-center text-sm font-medium shadow-2xl backdrop-blur-sm backdrop-filter focus:outline-none focus:ring-2 focus:ring-gray-400 ">
           {/* Home box */}
-          <div
+          <Link
+            href="/dashboard"
             className={`${
-              router.asPath === "/home" && "bg-[#303336]"
+              router.asPath === "/dashboard" && "bg-[#303336]"
             } flex items-center  justify-center rounded-2xl px-3 py-[5.4px] text-white hover:cursor-pointer hover:bg-[#303336]`}
           >
             <h1 className="text-base">Home</h1>
-          </div>
+          </Link>
 
-          <div
+          <Link
+            href="/faq"
             className={`${
-              router.asPath === "/home" && "bg-[#303336]"
+              router.asPath === "/faq" && "bg-[#303336]"
             } flex items-center  justify-center rounded-2xl px-3 py-[5.4px] text-white hover:cursor-pointer hover:bg-[#303336]`}
           >
             <h1 className="text-base">FAQ</h1>
-          </div>
+          </Link>
 
           <div
             onClick={() =>
@@ -75,6 +77,7 @@ import { getServerAuthSession } from "@/server/auth";
 import { type GetServerSideProps } from "next";
 
 import { generateSSGHelper } from "@/server/api/helpers/ssgHelper";
+import Link from "next/link";
 
 // export const getServerSideProps: GetServerSideProps = async (ctx) => {
 //   const session = await getServerAuthSession(ctx);
