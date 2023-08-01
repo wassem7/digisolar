@@ -39,9 +39,9 @@ export function LineChart() {
       </h1>
     );
   }
-  // if (isFetched === true) {
-  //   refetch();
-  // }
+  if (isFetched === true) {
+    refetch();
+  }
   // console.log("ISFETCHED", isFetched);
 
   const options: ChartOptions = {
