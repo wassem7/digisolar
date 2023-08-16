@@ -26,13 +26,13 @@ ChartJS.register(
 
 export function LineChart() {
   const {
-    data: phdata,
+    data: solardata,
     isRefetching,
     refetch,
     isFetched,
   } = api.reading.getpower.useQuery();
-  console.log("SOlar readings", phdata);
-  if (!phdata) {
+  console.log("SOlar readings", solardata);
+  if (!solardata) {
     return (
       <h1 className="font-semibold tracking-wider text-amber-500">
         Loading Power data...
@@ -90,14 +90,19 @@ export function LineChart() {
     },
   };
 
-  const formattedTimes = phdata.map((phvalue) => {
-    const ph = phvalue.createdAt;
+  const formattedTimes = solardata.map((solarvalue) => {
+    const ph = solarvalue.createdAt;
     const hours = ph.getUTCHours();
     const minutes = ph.getUTCMinutes();
-
-    const formattedTime = `${hours}:${minutes} ${hours > 11 ? "PM" : "AM"}`;
-
-    return formattedTime;
+    solardata.map((solarvalue) => {
+      const num = parseFloat(solarvalue.power);
+      if (typeof num !== "number" && isNaN(num)) {
+        return;
+      } else {
+        const formattedTime = `${hours}:${minutes} ${hours > 11 ? "PM" : "AM"}`;
+        return formattedTime;
+      }
+    });
   });
 
   // console.log("FORMATTED TIMES", formattedTimes);
@@ -110,13 +115,13 @@ export function LineChart() {
     datasets: [
       {
         label: "Power Value",
-        data: phdata.map((phvalue) => {
-          const num = parseFloat(phvalue.power);
+        data: solardata.map((solarvalue) => {
+          const num = parseFloat(solarvalue.power);
           if (typeof num !== "number" && isNaN(num)) {
             return;
           }
 
-          return phvalue.power;
+          return solarvalue.power;
         }),
         borderColor: "#fbbf24",
         backgroundColor: "#c2410c",

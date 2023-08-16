@@ -3,7 +3,6 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { FormEventHandler, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import Link from "next/link";
 import LoadingSpinnerYellow from "./LoadingSpinnerYellow";
 
 const SignIn: NextPage = () => {
@@ -26,11 +25,6 @@ const SignIn: NextPage = () => {
       callbackUrl: `${window.location.origin}/dashboard`,
     });
 
-    // if (result?.error) {
-    //   setError(result.error);
-    // } else {
-    //   router.push(callbackUrl);
-    // }
     if (res?.error) {
       setLoadingSpinner(false);
       setError(true);
@@ -39,16 +33,12 @@ const SignIn: NextPage = () => {
       router.push(`${window.location.origin}/dashboard`);
     }
 
-    console.log(res);
+    // console.log(res);
   };
 
   return (
     <div className=" flex min-h-screen  flex-col items-center justify-center bg-black">
       <div className=" /w-full relative m-8 flex flex-col items-center justify-center rounded-xl border bg-[#141414] px-14 py-20 shadow-md backdrop-blur-sm backdrop-filter focus:outline-none">
-        {/* <div className="flex items-center rounded-lg bg-white ">
-            <h1>Hello</h1>
-          </div> */}
-
         <div className="/absolute flex-co /bg-purple-500 -mb-8 -mt-11 flex ">
           <Image
             className="h-64 w-64"

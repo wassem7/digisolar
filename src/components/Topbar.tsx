@@ -73,24 +73,5 @@ const Topbar = () => {
 
 export default Topbar;
 
-import { getServerAuthSession } from "@/server/auth";
-import { type GetServerSideProps } from "next";
 
-import { generateSSGHelper } from "@/server/api/helpers/ssgHelper";
 import Link from "next/link";
-
-// export const getServerSideProps: GetServerSideProps = async (ctx) => {
-//   const session = await getServerAuthSession(ctx);
-
-//   return {
-//     props: { session },
-//   };
-// };
-
-// export const getServerSideProps: GetServerSideProps = async (ctx) => {
-//   const session = await getServerAuthSession(ctx);
-
-//   return {
-//     props: { session },
-//   };
-// };
